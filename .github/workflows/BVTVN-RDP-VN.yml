@@ -1,0 +1,43 @@
+name: DRP
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    timeout-minutes: 9999
+
+    steps:
+    - name: Tải xuống Ngrok & NSSM
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/buivanthien1/Windows-SV19-VN/bvtvn/ngrok.exe -OutFile ngrok.exe
+        Invoke-WebRequest https://raw.githubusercontent.com/buivanthien1/Windows-SV19-VN/bvtvn/nssm.exe -OutFile nssm.exe
+    - name: Sao chép NSSM & Ngrok vào Thư mục Windows.
+      run: | 
+        copy nssm.exe C:\Windows\System32
+        copy ngrok.exe C:\Windows\System32
+    - name: Kết nối tài khoản NGROK của bạn
+      run: .\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+      env:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+    - name: Tải xuống các tệp quan trọng.
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/buivanthien1/Windows-SV19-VN/bvtvn/NGROK-VN.bat -OutFile NGROK-VN.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/buivanthien1/Windows-SV19-VN/bvtvn/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/buivanthien1/Windows-SV19-VN/bvtvn/loop.bat -OutFile loop.bat
+    - name: Tạo tệp YML cho NGROK.
+      run: start NGROK-US.bat
+    - name: Bật quyền truy cập RDP.
+      run: | 
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+        Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+    - name: Tạo Tunnel
+      run: sc start ngrok
+    - name: Kết nối với RDP của bạn.
+      run: cmd /c NGROK-CHECK.bat
+    - name: Đã Xong! Bạn có thể đóng Tab ngay bây giờ! Thời gian VPS:6h.
+      run: cmd /c loop.bat 
+      
+    
