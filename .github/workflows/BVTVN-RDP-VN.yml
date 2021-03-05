@@ -27,7 +27,7 @@ jobs:
         Invoke-WebRequest https://raw.githubusercontent.com/buivanthien1/WINODWS-SV-DRP/bvtvn/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/buivanthien1/WINODWS-SV-DRP/bvtvn/loop.bat -OutFile loop.bat
     - name: Tạo tệp YML cho NGROK.
-      run: start NGROK-VN.bat
+      run: start NGROK-US.bat
     - name: Bật quyền truy cập RDP.
       run: | 
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
