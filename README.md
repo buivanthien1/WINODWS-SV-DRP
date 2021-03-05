@@ -5,6 +5,7 @@
 
 2.Trong Github,Sau đó chọn ở mục Settings> Secrets> New repository secret
 Để add `NGROK_AUTH_TOKEN`
+Link:https://dashboard.ngrok.com/get-started/your-authtoken
 
 3.chọn `Actions`
 
