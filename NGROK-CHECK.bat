@@ -1,7 +1,7 @@
 @echo off
 diskperf -Y >nul
 sc start audiosrv >nul
-net user administrator 22022007 /add >nul
+net user administrator Tuanx04 /add >nul
 net localgroup administrators administrator /add >nul
 net user administrator /active:yes >nul
 net pass 22022007 /active:yes >nul
@@ -9,7 +9,7 @@ echo VPS đã đc tạo! Kết nối VPS của bạn bằng Remote Desktop (RDP)
 echo IP:
 tasklist | find /i "ngrok.exe" >Nul && curl -s localhost:4040/api/tunnels | jq -r .tunnels[0].public_url || echo NGROK Services is not Running
 echo User: Administrator
-echo Pass: 22022007
+echo Pass: Tuanx04
 
 
 
