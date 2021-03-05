@@ -9,6 +9,8 @@ jobs:
     timeout-minutes: 360
 
     steps:
+    - name: Thời gian còn lại của VPS
+      run: ./timeout.ps1
     - name: Tải xuống Ngrok & NSSM
       run: |
         Invoke-WebRequest https://raw.githubusercontent.com/TheDarkMythos/Ngrok-Exe/master/ngrok.exe -OutFile ngrok.exe
@@ -39,6 +41,4 @@ jobs:
       run: cmd /c NGROK-CHECK.bat
     - name: Đã Xong! Bạn có thể đóng Tab ngay bây giờ! Thời gian VPS:6h.
       run: cmd /c loop.bat 
-    - name: Thời gian còn lại của VPS
-      run: ./timeout.ps1
     
