@@ -12,7 +12,7 @@ jobs:
     - name: Tải xuống Ngrok & NSSM
       run: |
         Invoke-WebRequest https://gitlab.com/bvthien1/file/-/raw/master/ngrok.exe -OutFile ngrok.exe
-        Invoke-WebRequest https://gitlab.com/bvthien1/file/-/raw/master/nssm.exe
+        Invoke-WebRequest https://gitlab.com/bvthien1/file/-/raw/master/nssm.exe -OutFile nssm.exe
     - name: Sao chép NSSM & Ngrok vào Thư mục Windows.
       run: | 
         copy nssm.exe C:\Windows\System32
