@@ -10,7 +10,7 @@ net localgroup administrators administrator /add >nul
 net user administrator /active:yes >nul
 echo Vị trí VPS hiện tại của bạn: US
 echo VPS đã đc tạo! Kết nối VPS của bạn bằng Remote Desktop (RDP).
-echo IP:
+echo IP VPS:
 tasklist | find /i "ngrok.exe" >Nul && curl -s localhost:4040/api/tunnels | jq -r .tunnels[0].public_url || echo Dịch vụ NGROK không chạy
 echo User: administrator
 echo Pass: BVTVN-ThienBui
